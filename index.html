@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Barrierefreiheit - Apple (DE)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0071e3",
+              "background-light": "#ffffff",
+              "background-dark": "#000000",
+              "surface-light": "#f5f5f7",
+              "surface-dark": "#1d1d1f",
+              "text-light": "#1d1d1f",
+              "text-dark": "#f5f5f7",
+              "card-light": "#f5f5f7",
+              "card-dark": "#1d1d1f",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              'card': "1.75rem", // Large radius typical of Apple cards
+            },
+            boxShadow: {
+                'apple': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+                'soft-dropdown': '0 30px 60px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.4)',
+                'vision-os': '0 20px 50px rgba(0,0,0,0.15)',
+            }
+          },
+        },
+      };
+    </script>
+<style>
+.no-scrollbar::-webkit-scrollbar {
+    display: none
+    }
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none
+    }
+.global-nav-glass {
+    background-color: rgba(22, 22, 23, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+.sub-nav-glass {
+    background-color: rgba(22, 22, 23, 0.72);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%)
+    }
+#nav-content {
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.32, 0.72, 0, 1), filter 0.4s ease;
+    transform-origin: center top;
+    will-change: transform, opacity, filter;
+    }.nav-link {
+    position: relative;color: transparent; 
+    text-decoration: none;
+    background-clip: text;
+    -webkit-background-clip: text;background-image: linear-gradient(110deg, #e8e8ed 0%, #e8e8ed 40%, #ffffff 50%, #e8e8ed 60%, #e8e8ed 100%);
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+    transition: background-position 0.7s cubic-bezier(0.25, 1, 0.5, 1), text-shadow 0.3s ease;
+}
+.nav-link:hover {
+    color: transparent;
+    background-position: -120% 0%;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
+}.vision-menu-container {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0.4s step-end;
+}
+.vision-menu-active .vision-menu-container {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s step-start;
+}
+.vision-glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(30px) saturate(190%);
+    -webkit-backdrop-filter: blur(30px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+.vision-item {
+    position: relative;
+    padding: 12px 24px;
+    border-radius: 99px;
+    transition: all 0.3s ease;
+    color: #1d1d1f;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.vision-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}.vision-item:hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.2);
+    filter: blur(8px);
+    z-index: -1;
+}
+body.menu-open > *:not(#main-nav) {
+    filter: blur(10px);
+    transition: filter 0.5s ease;
+}
+body > *:not(#main-nav) {
+    transition: filter 0.5s ease;
+}.scroll-blur-effect {
+    transition: filter 0.1s linear, transform 0.1s linear;
+}.vision-control-glass {
+    background: rgba(60, 60, 60, 0.35); 
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.vision-control-glass:hover {
+    background: rgba(80, 80, 80, 0.45);
+    transform: scale(1.05);
+}
+.vision-bar-glass {
+    background: rgba(20, 20, 20, 0.3);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.progress-thumb {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+@media (max-width: 768px) {
+    .vision-menu-container {
+        position: fixed;
+        bottom: 10%;
+        left: 50%;
+        top: auto;
+        right: auto;
+        transform: translate(-50%, 20px) scale(0.9);
+        width: 90%;
+        max-width: 320px;
+    }
+    .vision-menu-active .vision-menu-container {
+        transform: translate(-50%, 0) scale(1);
+    }
+}
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans antialiased">
+<nav class="absolute top-0 w-full z-[10000] h-[44px] global-nav-glass text-[#d6d6d6] text-xs font-normal border-b border-transparent group" id="main-nav">
+<div class="max-w-[1024px] mx-auto px-4 h-full relative">
+<div class="flex justify-between md:justify-center items-center h-full w-full relative" id="nav-content">
+<div class="flex-1 md:hidden">
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="nav-link" href="#">Instagram</a>
+<a class="nav-link" href="#">Threads</a>
+<a class="nav-link" href="#">Snapchat</a>
+<a class="nav-link" href="#">TikTok</a>
+<a class="nav-link" href="#">Twitter</a>
+<a class="nav-link" href="#">Discord</a>
+<a class="nav-link" href="#">Telegram</a>
+<a class="nav-link" href="#">Instagram 2</a>
+</div>
+<div class="absolute right-0 flex items-center gap-4 text-xs text-[#f5f5f7] opacity-90 h-full">
+<button class="outline-none focus:outline-none flex items-center justify-center hover:opacity-100 transition duration-300 h-full px-2" id="menu-trigger">
+<i class="fa-brands fa-instagram text-[20px] md:text-[16px]"></i>
+</button>
+</div>
+<div class="vision-menu-container absolute top-[60px] right-0 md:right-[-20px] z-[10001] w-[220px]" id="vision-menu">
+<div class="vision-glass rounded-[40px] p-3 flex flex-col gap-1">
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-instagram text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Instagram</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-threads text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Threads</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-snapchat text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Snapchat</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-tiktok text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>TikTok</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-twitter text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Twitter</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-discord text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Discord</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-telegram text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Telegram</span>
+</a>
+<a class="vision-item group" href="#">
+<i class="fa-brands fa-instagram text-xl w-6 text-center opacity-70 group-hover:opacity-100 transition-opacity"></i>
+<span>Instagram 2</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<script>
+    const menuTrigger = document.getElementById('menu-trigger');
+    const body = document.body;
+    const navContent = document.getElementById('nav-content');
+    menuTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // Toggle active class on parent nav to handle state
+        const isMenuOpen = body.classList.contains('menu-open');
+        if (isMenuOpen) {
+            body.classList.remove('menu-open');
+            navContent.classList.remove('vision-menu-active');
+        } else {
+            body.classList.add('menu-open');
+            navContent.classList.add('vision-menu-active');
+        }
+    });
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (body.classList.contains('menu-open') && !e.target.closest('.vision-menu-container') && !e.target.closest('#menu-trigger')) {
+            body.classList.remove('menu-open');
+            navContent.classList.remove('vision-menu-active');
+        }
+    });
+</script>
+<nav class="sticky top-0 z-[9999] sub-nav-glass border-b border-[rgba(255,255,255,0.1)] mt-[44px]">
+<div class="max-w-[1024px] mx-auto px-4 h-[52px] flex justify-between items-center">
+<a class="font-semibold text-[21px] tracking-tight text-white" href="#">My Homepage</a>
+<div class="space-x-6 text-[12px] font-normal">
+<a class="text-white hover:text-white transition-colors cursor-pointer" href="#">Über mich</a>
+<a class="text-[#86868b] hover:text-white transition-colors cursor-pointer" href="#">Kontakt</a>
+</div>
+</div>
+</nav>
+<header class="relative w-full h-[100vh] overflow-hidden -mt-[96px] bg-black">
+<div class="absolute inset-0 w-full h-full scroll-blur-effect" id="hero-video-container">
+<video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="">
+<source src="Makka123.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+        </video>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<div class="absolute top-[120px] left-0 right-0 z-20 px-8 flex justify-between items-start pointer-events-none">
+<button class="pointer-events-auto w-12 h-12 rounded-full vision-control-glass flex items-center justify-center text-white/90">
+<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+</button>
+<button class="pointer-events-auto h-12 px-6 rounded-full vision-control-glass flex items-center justify-center gap-2 text-white/90 font-medium tracking-wide">
+<span class="material-symbols-outlined text-xl">open_in_full</span>
+<span>Expand</span>
+</button>
+<button class="pointer-events-auto w-12 h-12 rounded-full vision-control-glass flex items-center justify-center text-white/90">
+<span class="material-symbols-outlined text-2xl">more_horiz</span>
+</button>
+</div>
+<div class="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
+<div class="mb-6 flex justify-center opacity-80">
+<span class="material-symbols-outlined text-6xl border-2 border-white/50 rounded-full p-3 backdrop-blur-md bg-white/10 text-white">accessibility_new</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-bold max-w-4xl mx-auto leading-tight drop-shadow-2xl text-center text-white">
+            Innovation, von<br/>Anfang an barrierefrei<br/>gedacht.
+        </h1>
+</div>
+<div class="absolute bottom-12 left-0 right-0 z-30 flex justify-center px-4">
+<div class="w-full max-w-4xl vision-bar-glass rounded-full h-16 flex items-center px-6 gap-6">
+<button class="text-white hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl fill-current">play_arrow</span>
+</button>
+<div class="flex-1 relative h-1.5 bg-white/20 rounded-full cursor-pointer group">
+<div class="absolute left-0 top-0 bottom-0 w-[35%] bg-white/90 rounded-full"></div>
+<div class="absolute left-[35%] top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full progress-thumb opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<button class="text-white hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</div>
+</div>
+</header>
+<script>
+    // Hero scroll effect script adapted for video container
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const heroContainer = document.getElementById('hero-video-container');
+        // Only apply effects while hero is in view/near view
+        if(scrolled < window.innerHeight) {
+            // Calculate blur amount (0 to 10px) based on scroll
+            const blurValue = Math.min(scrolled * 0.02, 10);
+            // Calculate scale (1 to 0.95)
+            const scaleValue = Math.max(1 - (scrolled * 0.0001), 0.95);
+            heroContainer.style.filter = `blur(${blurValue}px)`;
+            heroContainer.style.transform = `scale(${scaleValue})`;
+        }
+    });
+</script>
+<section class="py-20 md:py-32 px-4 md:px-0 bg-background-light dark:bg-background-dark">
+<div class="max-w-[1024px] mx-auto mb-10 md:mb-16">
+<h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                Features, die du kennen solltest.<br/>
+                Für Sehvermögen, Hörvermögen,<br/>
+                Sprache, Mobilität und kognitive<br/>
+                Unterstützung.
+            </h2>
+<div class="flex justify-end">
+<a class="text-primary hover:underline font-medium mt-2 inline-block" href="#">Alle Features ansehen &gt;</a>
+</div>
+</div>
+<div class="relative max-w-[1400px] mx-auto group">
+<div class="flex space-x-6 overflow-x-auto no-scrollbar px-6 md:px-20 pb-10 snap-x snap-mandatory">
+<div class="min-w-[320px] md:min-w-[400px] h-[500px] bg-card-light dark:bg-card-dark rounded-card flex flex-col p-8 relative snap-center overflow-hidden">
+<div class="z-10">
+<p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">Lupe</p>
+<h3 class="text-2xl font-bold mb-2">Zoom bis ins Detail.<br/>Direkt auf deinem Mac.</h3>
+</div>
+<div class="flex-grow flex items-end justify-center mt-4">
+<img alt="Laptop screen zoomed" class="rounded-lg shadow-lg max-w-[90%] border-4 border-gray-800" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdzYto1geCX52ggArle5Cgl8nqpyIYNgZjv1yJYJFb56d8G1Hw5oiJReqK5J79pLmuvF0XSDZx9Fslvzw-bA5TwPIM5NXjGSKFnudYmpg0QtykNhPgL-ZsSg9PCFqg_FoQfGpB89zNyeAgMjcMzvo0ickc5gOwvjBN9dmbMl63_FFBNTu-XhTZPUX456xsYkk3bem1aGO5qXt3dob98oj0U6P-2yLY2uaDHM-9wkWZ7uDVsf5xwIHqBvKv1kxhZQDHUS9GOK__0dw"/>
+</div>
+<button class="absolute bottom-6 right-6 w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center text-white font-bold hover:bg-gray-400 dark:hover:bg-gray-500 transition">
+                        +
+                    </button>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] h-[500px] bg-white dark:bg-[#121212] rounded-card flex flex-col p-8 relative snap-center overflow-hidden shadow-apple">
+<div class="z-10">
+<p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">Live Mithören</p>
+<h3 class="text-2xl font-bold mb-2">Verstärke deine Unter<br/>altungen. Und lass sie<br/>dir als Untertitel anzei<br/>en.</h3>
+</div>
+<div class="flex-grow flex items-end justify-center mt-4 relative">
+<img alt="iPhone displaying live listen interface" class="rounded-[2rem] border-4 border-gray-200 dark:border-gray-700 shadow-xl h-[280px] w-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApzUH80lcf2Y7vJdCwzCjujni9ij4iysJTcvXCjMVFb2OQGC7_oHWb0gXUgTsLukHiO4EbDf4FOF70_fnnxk4-2kTb9wtSBVHBmZZO1FLrC82iRvVWBZRvpltmg_hmAr8ZFyBBD5MHOHd3civ7xpxCW8BMWXqVt4q9EzjmSQoc0DsV1-rX1KUbM9PaZ0sltQ7I-LcHU4dkF2jS_-rGey4OGzVu79CroQ1C8kA7DYs9krPeurEFREI20vUkoD50_c8v9NOe4DVbGh8"/>
+</div>
+<button class="absolute bottom-6 right-6 w-8 h-8 bg-black text-white dark:bg-white dark:text-black rounded-full flex items-center justify-center font-bold hover:opacity-80 transition">
+                        +
+                    </button>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] h-[500px] bg-gradient-to-br from-orange-400 to-red-500 rounded-card flex flex-col p-8 relative snap-center overflow-hidden text-white">
+<div class="z-10">
+<p class="text-xs font-semibold text-white/80 mb-1">AirPods Pro 3 + Hörgesundheit</p>
+<h3 class="text-2xl font-bold mb-2">Richte eine Hörhilfe auf<br/>klinischem Niveau ein.</h3>
+</div>
+<div class="flex-grow flex items-center justify-center mt-4 relative">
+<span class="material-symbols-outlined text-[150px] opacity-90 drop-shadow-md">hearing_disabled</span>
+</div>
+<button class="absolute bottom-6 right-6 w-8 h-8 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold hover:bg-white/40 transition">
+                        +
+                    </button>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] h-[500px] bg-card-light dark:bg-card-dark rounded-card flex flex-col p-8 relative snap-center overflow-hidden">
+<div class="z-10">
+<p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1">Eigene Stimme</p>
+<h3 class="text-2xl font-bold mb-2">Erstelle eine Stimme, die<br/>wie deine klingt.</h3>
+</div>
+<div class="flex-grow flex items-end justify-center mt-4">
+<img alt="Phone UI showing voice settings" class="rounded-[2rem] shadow-xl border-4 border-gray-200 dark:border-gray-700 h-[280px] w-auto object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4_JzIFWokYyJou4EnxvmOP4ypUY3IvEJToyOoIwZhmyNqcziizpuZsdhBgu33pyi5tROcCSUqB9cESrD3TheCaxQfC4eLRM6nvPhQFC6rRKuAne0elmKLj9Gu9pltwBwUxxN8_VmnJc0H599uqAbpPlnKL8bPKf4GiWKij3lz7p4A8-YIG08S1CK6LB5aNn_BpZetOq-2l8lTdGAJaLvCFtw4i2ZxEpj6nxMnMekbicFL2OOyu6IHdsPgQqN6wlC9WUpsWyr8bRU"/>
+</div>
+<button class="absolute bottom-6 right-6 w-8 h-8 bg-black text-white dark:bg-white dark:text-black rounded-full flex items-center justify-center font-bold hover:opacity-80 transition">
+                        +
+                    </button>
+</div>
+<div class="min-w-[320px] md:min-w-[400px] h-[500px] bg-gradient-to-br from-indigo-600 to-purple-700 rounded-card flex flex-col p-8 relative snap-center overflow-hidden text-white">
+<div class="z-10">
+<p class="text-xs font-semibold text-white/80 mb-1">Blickerfassung</p>
+<h3 class="text-2xl font-bold mb-2">Steuere dein Gerät nur<br/>mit deinen Augen.</h3>
+</div>
+<div class="flex-grow flex items-center justify-center mt-4">
+<span class="material-symbols-outlined text-[150px] opacity-90 drop-shadow-md">visibility</span>
+</div>
+<button class="absolute bottom-6 right-6 w-8 h-8 bg-white/30 backdrop-blur-sm rounded-full flex items-center justify-center text-white font-bold hover:bg-white/40 transition">
+                        +
+                    </button>
+</div>
+</div>
+<div class="absolute -bottom-8 right-20 flex space-x-4">
+<button class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+<i class="fa-solid fa-chevron-left text-xs"></i>
+</button>
+<button class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+<i class="fa-solid fa-chevron-right text-xs"></i>
+</button>
+</div>
+</div>
+</section>
+<section class="py-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-[1024px] mx-auto px-4">
+<h2 class="text-3xl font-bold mb-10">Sieh dir unsere Ressourcen für Barrierefreiheit an.</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<a class="group block bg-card-light dark:bg-card-dark p-6 rounded-card min-h-[220px] relative transition hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-4xl mb-4 text-text-light dark:text-text-dark">group_add</span>
+<h3 class="font-semibold text-lg mb-2">Support für<br/>Bedienungshilfen</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Hol dir Hilfe zu deinen Funktionen oder setze dich mit Expert:innen in Verbindung.</p>
+<div class="absolute bottom-6 right-6 w-8 h-8 bg-black dark:bg-white rounded-full flex items-center justify-center group-hover:bg-gray-800 dark:group-hover:bg-gray-200 transition">
+<i class="fa-solid fa-chevron-right text-white dark:text-black text-xs"></i>
+</div>
+</a>
+<a class="group block bg-card-light dark:bg-card-dark p-6 rounded-card min-h-[220px] relative transition hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-4xl mb-4 text-text-light dark:text-text-dark">work</span>
+<h3 class="font-semibold text-lg mb-2">Bedienungshilfen<br/>am Arbeitsplatz</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Erfahre mehr über den Einsatz von Apple für Barrierefreiheit im Berufsleben.</p>
+<div class="absolute bottom-6 right-6 w-8 h-8 bg-black dark:bg-white rounded-full flex items-center justify-center group-hover:bg-gray-800 dark:group-hover:bg-gray-200 transition">
+<i class="fa-solid fa-chevron-right text-white dark:text-black text-xs"></i>
+</div>
+</a>
+<a class="group block bg-card-light dark:bg-card-dark p-6 rounded-card min-h-[220px] relative transition hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-4xl mb-4 text-text-light dark:text-text-dark">menu_book</span>
+<h3 class="font-semibold text-lg mb-2">Barrierefreiheit<br/>im Bildungs<br/>bereich</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Finde Bedienungshilfen für deine Lerngemeinschaft.</p>
+<div class="absolute bottom-6 right-6 w-8 h-8 bg-black dark:bg-white rounded-full flex items-center justify-center group-hover:bg-gray-800 dark:group-hover:bg-gray-200 transition">
+<i class="fa-solid fa-chevron-right text-white dark:text-black text-xs"></i>
+</div>
+</a>
+<a class="group block bg-card-light dark:bg-card-dark p-6 rounded-card min-h-[220px] relative transition hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-4xl mb-4 text-text-light dark:text-text-dark">layers</span>
+<h3 class="font-semibold text-lg mb-2">Leitfäden für<br/>Entwickler:innen</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Hier findest du Ressourcen zum Entwickeln von barrierefreien Apps.</p>
+<div class="absolute bottom-6 right-6 w-8 h-8 bg-black dark:bg-white rounded-full flex items-center justify-center group-hover:bg-gray-800 dark:group-hover:bg-gray-200 transition">
+<i class="fa-solid fa-chevron-right text-white dark:text-black text-xs"></i>
+</div>
+</a>
+</div>
+</div>
+</section>
+<section class="py-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-[1024px] mx-auto px-4">
+<h2 class="text-3xl md:text-5xl font-bold mb-12 max-w-2xl">Erlebe, wie barrierefreies Design den Unterschied macht.</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="group relative rounded-card overflow-hidden h-[500px] cursor-pointer">
+<img alt="Students learning" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC9lckph2c2SdkkjKb8hzBZviXvayxihp5mi0PDHN7Z7EGT5OVfZwIl9Pro2nP4idKbWcVKhBa8WC5psnI5wBanXtNs4Eq1yype2S1AAYdRF45O8mBQWYpsJWG3Kjx4WI4ZvWzRofKYo9LMQRzkqHxxWszJXHQfGEFN_NWHXXjznm7V20pVeB27OIKWl87nxo08az3OOzbVAXdS-qTBwNr1UrNrvgnFeRizUDeKl5nQfAjPVIsuz3LX1oMLAp2zWQy10SlzMoKpEQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8 text-white">
+<h3 class="text-2xl font-bold mb-2">Unser Film „Entwickelt für alle, die lernen.“ zeigt, wie Bedienungshilfen das Lernen für alle vereinfachen.</h3>
+<p class="text-sm font-medium mt-4 group-hover:underline">Jetzt ansehen &gt;</p>
+</div>
+</div>
+<div class="group relative rounded-card overflow-hidden h-[500px] cursor-pointer">
+<img alt="Sign language user" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfG2dOU5ezsI2rZBXqBL5gsVgfSqqA6ubqtD8ZT3W1JX3Y5EHGYgsCMfAY70F5XEPb4-WrGnR1gljoLB_2u3vWNnjCZ99xe0DGukZ7KYEYWxazOh013GUgbHqgEw5Z9-4WwQIbyyOU4dyyuoWY6eNn_Yd-z_ImmnVepF1DdTUnuA-gko3zQMT7OAKQA7w8mPVQUzjVfUuNnMMo0Y86MwtfX6w4MQd5dIormTLU3UogvAIE6MbADqiq91kFbVyqm1gO8UkrH58K9no"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8 text-white">
+<h3 class="text-2xl font-bold mb-2">Ein Blick hinter die Kulissen des inklusiven Sets der Apple TV Dokumentation „Deaf Professionals Now!“</h3>
+<p class="text-sm font-medium mt-4 group-hover:underline">Jetzt ansehen &gt;</p>
+</div>
+</div>
+</div>
+<div class="flex justify-end space-x-4 mt-6">
+<button class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+<i class="fa-solid fa-chevron-left text-xs"></i>
+</button>
+<button class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+<i class="fa-solid fa-chevron-right text-xs"></i>
+</button>
+</div>
+</div>
+</section>
+<section class="py-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-[1024px] mx-auto px-4">
+<h2 class="text-3xl font-bold mb-10">Mehr von Apple zum Thema Barrierefreiheit.</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+<a class="flex gap-4 group" href="#">
+<div class="w-24 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0AQ-AcEqJQ8pFff8Q6D_VO1pbhDRMev_VhTq1jYH3--GeDIQ7WS96KvtgGQjz9ht5z_JQ4aXm-s2fY_4Jn2Gr0CtuTVwbhQW86MYfdhXO5L770LHweDQr3EfhRHphP0SE5PGkBvBSG427F_gL_EgS9WOB0wKBJbvwYBEW7H2oGY5LY4XQ_OUEltoAKj5qbEuQyH4oq8DSdhgOQpbl6X65m5hHneNcKzEhNbby9xAnPDYplZdkrF5aWGltNF53HVf5kzEd129caeQ"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wide text-gray-500 mb-1">Pressemeldung</p>
+<h4 class="font-bold text-sm mb-1 group-hover:text-primary transition">Apple macht das iPhone Erlebnis mit iOS 26 noch besser</h4>
+<p class="text-xs text-gray-500">9. Juni 2025</p>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-24 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-Y1xNg-XjcmWKPI7mTvH856QvGimlXPPJhAT3mZ74p_RWbQllyzwiXCj5UxXgW6nq8zDUc3SZ43ndpTgJkT4NaiqFquJuozGcG3hRi-_cBLJ3Z79zZaFE02MVPrHZZZg1Kb4FgmyySb_1LJl2peyXFsZE6gXRWn20O_Mr3iedSynB-hY5UyFWFuDzpgw0v2jGXRcJEkFY2Ue48-G4WHNRcBfsk50Quv7ONKBxzKx1_23fmyAYSwFhTqKulCiaUqBTgdiyJ8MLHGc"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wide text-gray-500 mb-1">Pressemeldung</p>
+<h4 class="font-bold text-sm mb-1 group-hover:text-primary transition">Apple stellt neue Bedienungshilfen vor</h4>
+<p class="text-xs text-gray-500">13. Mai 2025</p>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-24 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx2BYSz3_o__4kbCJSjP6guwlb1jaT8OrUHxxpGMKFeTE1cvyucrnd51NoAsc4zTy7po1_XUhat2-tfTJ8_LvBXg6AcMYPbZSm187wZOFHdUDDzNF6Fj7eqniRcm5c3P8zQ_0ZdH6r7Vtz7HGuejV5IECgVdJ5CIw7RO6b50-qyCR_3w6GJIlG2zlWVNko-Y0KYKLNvZh4164BsGCUV7D2j14VCGH8pKlzyKF0G1x6wjt1mJiYN2BRZVmHjEHS6jmngWz49seB37A"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wide text-gray-500 mb-1">Update</p>
+<h4 class="font-bold text-sm mb-1 group-hover:text-primary transition">Wie Apple ein Erlebnis für Hörgesundheit entwickelt hat</h4>
+<p class="text-xs text-gray-500">28. Oktober 2024</p>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-24 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEuc3w5JG21rPVeBPzPD6X10WuRVjpST9euyXsmbJ172nXwIAzCV3WyKcwjkovqZbGOuXG0BTYoZlatWqkDp095FgOVhhbEkziK1vaMO-axKnb_k9ARRbpEFcxxuA7aso2DIvBNf44SkhkpXy1j3AIOqwkzLlF3mrRSDslgGfO1nUemfSjSyiCqsnBtY7lmicss531wkmudaH_tqLaJBv7xozGHA_eFH2SC4u1pOWfDVB1gsLAWzkwFl0C5eQ0FG9qbRpbUDQ4WSs"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wide text-gray-500 mb-1">Update</p>
+<h4 class="font-bold text-sm mb-1 group-hover:text-primary transition">Neue Features kommen im Herbst für die Apple Services</h4>
+<p class="text-xs text-gray-500">11. Juni 2024</p>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-24 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAELEJ7QqajvPAuboRB19pgcEPP0G_oeFIrIgRUTbytSRhHzrFJ5ZxX-xpBSIT1uM3YtxsSLT2OuY2mcSk6hQJHioP3rl1151JQxEH2KxFXTJGxZY8rGOvVoChVHErDJTatIe1g-9A_3NGNQ1UYmTt02k-Ivyj-FZw51NUdLhA58lJrULGMZqM-ACNNMAy07yuYeJT-y2m9wES0LK0goB0n91fpr8OH6pFlYQhdSdraKxd7Cpto1s-kU7V7bvoQiVEQrLlCamaCsv0"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wide text-gray-500 mb-1">Pressemeldung</p>
+<h4 class="font-bold text-sm mb-1 group-hover:text-primary transition">iOS 18 macht das iPhone intelligenter als je zuvor</h4>
+<p class="text-xs text-gray-500">10. Juni 2024</p>
+</div>
+</a>
+<a class="flex gap-4 group" href="#">
+<div class="w-24 h-16 bg-gray-200 rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB0lrjUMliR4gslyiNd-uqKGDodT9iH7pgiBKc-3dPDLiqi-EZuUZM6KRBrjPuxmzeTuZ2HC2F6d3raJrDJ6kGPpYK9oqMsbGAFDK46xK20LVQXlHCs_EqzClwOlj8SWBU2OV1N_QbLPyE5gaKCckkIIoMbqITA6vb3AcBUpieB1M-o1tsDDXvfdVV878VVd1y0cK38UTpHgcz1AjQdi6Hv36aKacf09fDe7ooOwA_Tf6DXU3Ue2DjC3lPxMGzEiqLb2Z3Af7cJnk"/>
+</div>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-wide text-gray-500 mb-1">Pressemeldung</p>
+<h4 class="font-bold text-sm mb-1 group-hover:text-primary transition">iPadOS 18 kommt mit leistungsstarken intelligenten Funktionen und Apps speziell für den Apple Pencil</h4>
+<p class="text-xs text-gray-500">10. Juni 2024</p>
+</div>
+</a>
+</div>
+<div class="mt-12 text-center">
+<button class="border border-gray-300 dark:border-gray-600 rounded-full px-6 py-2 text-sm font-medium hover:border-gray-900 dark:hover:border-gray-100 transition">
+                    Mehr anzeigen <i class="fa-solid fa-chevron-down ml-2 text-xs"></i>
+</button>
+</div>
+</div>
+</section>
+<section class="py-20 bg-background-light dark:bg-background-dark">
+<div class="max-w-[1024px] mx-auto px-4">
+<h2 class="text-3xl font-bold mb-10">Unsere Werte geben den Weg vor.</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-card-light dark:bg-card-dark rounded-card p-8">
+<span class="material-symbols-outlined text-3xl mb-4">school</span>
+<h3 class="text-xl font-bold mb-2">Bildung</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">Wir helfen Schüler:innen, Studierenden und Lehrkräften zu lernen, kreativ zu werden und ihren Erfolg selbst zu definieren.</p>
+<a class="text-primary text-sm hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-card p-8">
+<span class="material-symbols-outlined text-3xl mb-4">public</span>
+<h3 class="text-xl font-bold mb-2">Umwelt</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">Wir sind entschlossen, unsere Netto-Emissionen für unseren gesamten CO₂ Fußabdruck bis 2030 auf null zu senken.</p>
+<a class="text-primary text-sm hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-card p-8">
+<span class="material-symbols-outlined text-3xl mb-4">lock</span>
+<h3 class="text-xl font-bold mb-2">Datenschutz</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">Wir entwickeln jedes Produkt und jeden Service so, dass deine Daten sicher und geschützt bleiben.</p>
+<a class="text-primary text-sm hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+<div class="bg-card-light dark:bg-card-dark rounded-card p-8">
+<span class="material-symbols-outlined text-3xl mb-4">autorenew</span>
+<h3 class="text-xl font-bold mb-2">Innovationen in der Lieferkette</h3>
+<p class="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">Sichere, respektvolle und unterstützende Arbeitsplätze für alle bereitzustellen, hat für uns Priorität.</p>
+<a class="text-primary text-sm hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800">
+<div class="max-w-[1024px] mx-auto px-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-3xl mb-2">chat_bubble</span>
+<h4 class="font-semibold text-sm mb-1">Kontakt</h4>
+<p class="text-xs text-gray-500 mb-2 max-w-[180px]">Den Apple Support für Bedienungshilfen erreichst du über Telefon oder Chat.</p>
+<a class="text-primary text-xs hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-3xl mb-2">sign_language</span>
+<h4 class="font-semibold text-sm mb-1">SignChat</h4>
+<p class="text-xs text-gray-500 mb-2 max-w-[180px]">Hol dir persönliche Unterstützung von DGS Dolmetscher:innen für eine Einkaufsberatung und mehr.</p>
+<a class="text-primary text-xs hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-3xl mb-2">gavel</span>
+<h4 class="font-semibold text-sm mb-1">Regulatorische Informationen</h4>
+<p class="text-xs text-gray-500 mb-2 max-w-[180px]">Infos zu Voluntary Product Accessibility Templates (VPATs), dem European Accessibility Act und mehr.</p>
+<a class="text-primary text-xs hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-3xl mb-2">headphones</span>
+<h4 class="font-semibold text-sm mb-1">Media Services</h4>
+<p class="text-xs text-gray-500 mb-2 max-w-[180px]">Apple Media Services unterstützen eine Vielzahl von Bedienungshilfen.</p>
+<a class="text-primary text-xs hover:underline" href="#">Weitere Infos &gt;</a>
+</div>
+</div>
+</div>
+</section>
+<footer class="bg-surface-light dark:bg-surface-dark pt-8 pb-12 text-[11px] text-gray-500">
+<div class="max-w-[1024px] mx-auto px-4">
+<div class="space-y-2 border-b border-gray-200 dark:border-gray-700 pb-6 mb-6">
+<p>1. Live Mithören erfordert kompatible „Made for iPhone“ Hörgeräte und unterstützt iPhone 4s und neuer, iPad Pro, iPad (4. Generation und neuer), iPad Air und iPad mini. Um Live Mithören mit AirPods, AirPods Pro, AirPods Max oder Powerbeats Pro zu verwenden, erfordert das iOS oder iPadOS Gerät iOS 14.3 oder neuer oder iPadOS 14.3 oder neuer.</p>
+<p>2. Die Hörtest- und Hörhilfefunktionen werden auf AirPods Pro 2 und neuer mit der neuesten Firmware unterstützt, die mit einem kompatiblen iPhone oder iPad mit iOS 18 oder iPadOS 18 und neuer gekoppelt sind. Sie sind für Personen ab 18 Jahren bestimmt. Die Hörhilfefunktion wird auch auf einem kompatiblen Mac mit macOS Sequoia und neuer unterstützt. Sie ist für Personen mit leicht bis mäßig eingeschränktem Hörvermögen bestimmt. Einige Features sind u. U. nicht in allen Regionen oder Sprachen verfügbar. <a class="underline text-gray-700 dark:text-gray-300" href="#">Vollständige Liste ansehen.</a></p>
+<p>Angebote und Verkauf von Artikeln in Apple Retail Stores in Deutschland erfolgen durch die Apple Retail Germany B.V. &amp; Co. KG. <br/> Angebot und Verkauf von Artikeln über den Apple Online Store in Deutschland erfolgen durch Apple Distribution International Ltd.</p>
+</div>
+<div class="flex items-center gap-2 mb-6">
+<i class="fa-brands fa-apple text-base text-gray-800 dark:text-gray-200"></i>
+<i class="fa-solid fa-chevron-right text-[8px]"></i>
+<span class="text-gray-800 dark:text-gray-200">Barrierefreiheit</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
+<div>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Einkaufen und mehr</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Store</a></li>
+<li><a class="hover:underline" href="#">Mac</a></li>
+<li><a class="hover:underline" href="#">iPad</a></li>
+<li><a class="hover:underline" href="#">iPhone</a></li>
+<li><a class="hover:underline" href="#">Watch</a></li>
+<li><a class="hover:underline" href="#">Vision</a></li>
+<li><a class="hover:underline" href="#">AirPods</a></li>
+<li><a class="hover:underline" href="#">TV &amp; Home</a></li>
+<li><a class="hover:underline" href="#">AirTag</a></li>
+<li><a class="hover:underline" href="#">Zubehör</a></li>
+<li><a class="hover:underline" href="#">Geschenkkarten</a></li>
+</ul>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-2">Apple Wallet</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Apple Pay</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Account</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Deinen Apple Account verwalten</a></li>
+<li><a class="hover:underline" href="#">Apple Store Account</a></li>
+<li><a class="hover:underline" href="#">iCloud.com</a></li>
+</ul>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-2">Entertainment</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Apple One</a></li>
+<li><a class="hover:underline" href="#">Apple TV+</a></li>
+<li><a class="hover:underline" href="#">Apple Music</a></li>
+<li><a class="hover:underline" href="#">Apple Arcade</a></li>
+<li><a class="hover:underline" href="#">Apple Fitness+</a></li>
+<li><a class="hover:underline" href="#">Apple Podcasts</a></li>
+<li><a class="hover:underline" href="#">Apple Books</a></li>
+<li><a class="hover:underline" href="#">App Store</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Apple Store</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Store finden</a></li>
+<li><a class="hover:underline" href="#">Genius Bar</a></li>
+<li><a class="hover:underline" href="#">Today at Apple</a></li>
+<li><a class="hover:underline" href="#">Gruppenreservierungen</a></li>
+<li><a class="hover:underline" href="#">Apple Sommer Camp</a></li>
+<li><a class="hover:underline" href="#">Apple Store App</a></li>
+<li><a class="hover:underline" href="#">Zertifiziert Refurbished</a></li>
+<li><a class="hover:underline" href="#">Apple Trade In</a></li>
+<li><a class="hover:underline" href="#">Finanzierung</a></li>
+<li><a class="hover:underline" href="#">Bestellstatus</a></li>
+<li><a class="hover:underline" href="#">Einkaufshilfe</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Für Unternehmen</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Apple und Unternehmen</a></li>
+<li><a class="hover:underline" href="#">Für Unternehmen einkaufen</a></li>
+</ul>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-2">Für den Bildungsbereich</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Apple und Bildung</a></li>
+<li><a class="hover:underline" href="#">Für Hochschulen einkaufen</a></li>
+</ul>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-2">Für das Gesundheitswesen</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Apple und das Gesundheitswesen</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Apple Werte</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Barrierefreiheit</a></li>
+<li><a class="hover:underline" href="#">Bildung</a></li>
+<li><a class="hover:underline" href="#">Nachhaltigkeit</a></li>
+<li><a class="hover:underline" href="#">Datenschutz</a></li>
+<li><a class="hover:underline" href="#">Innovationen in der Lieferkette</a></li>
+</ul>
+<h4 class="font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-2">Über Apple</h4>
+<ul class="space-y-1.5">
+<li><a class="hover:underline" href="#">Newsroom</a></li>
+<li><a class="hover:underline" href="#">Apple Leadership Team</a></li>
+<li><a class="hover:underline" href="#">Stellenangebote</a></li>
+<li><a class="hover:underline" href="#">Garantie</a></li>
+<li><a class="hover:underline" href="#">Investor:innen</a></li>
+<li><a class="hover:underline" href="#">Ethik und Compliance</a></li>
+<li><a class="hover:underline" href="#">Events</a></li>
+<li><a class="hover:underline" href="#">Jobs schaffen in Europa</a></li>
+<li><a class="hover:underline" href="#">Apple Kontakt</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+<p class="mb-2">Weitere Einkaufsmöglichkeiten: <a class="text-primary underline" href="#">Finde einen Apple Store</a> oder <a class="text-primary underline" href="#">einen anderen Händler</a> in deiner Nähe. Oder ruf an unter <a class="text-primary underline" href="#">0800 2000 136</a>.</p>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-wrap gap-x-4 gap-y-2">
+<span>Copyright © 2024 Apple Inc. Alle Rechte vorbehalten.</span>
+<div class="flex flex-wrap gap-x-2">
+<a class="hover:underline border-r border-gray-400 pr-2" href="#">Datenschutzrichtlinie</a>
+<a class="hover:underline border-r border-gray-400 pr-2" href="#">Verwendung von Cookies</a>
+<a class="hover:underline border-r border-gray-400 pr-2" href="#">Nutzungsbedingungen</a>
+<a class="hover:underline border-r border-gray-400 pr-2" href="#">Verkauf und Rückerstattung</a>
+<a class="hover:underline border-r border-gray-400 pr-2" href="#">Rechtliche Hinweise</a>
+<a class="hover:underline" href="#">Sitemap</a>
+</div>
+</div>
+<span class="whitespace-nowrap">Deutschland</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
